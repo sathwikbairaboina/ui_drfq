@@ -5,13 +5,5 @@
       "providerPlugin": "awscloudformation",
       "type": "manual"
     }
-  },
-  "auth": {
-    "uidrfqe6ca2376": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
   }
 }

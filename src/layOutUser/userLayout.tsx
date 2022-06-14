@@ -73,6 +73,20 @@ const UserLayout = ({user}: Props) => {
 
 
   return (
+  <>
+    <Row  gutter={8}>
+            <Col span={18}>
+              {''}
+             </Col>
+            <Col>
+              <Button type="link" onClick={()=> navigate({pathname: `/admin`})} size='large' style={{color:'green' , padding:'20px',float:'right'}}>
+                Admin
+              </Button> 
+              <Button type="link" onClick={()=> navigate({pathname: `/`})} size='large' style={{color:'green' , padding:'20px',float:'right'}}>
+                Home
+              </Button> 
+           </Col>
+     </Row>
     <Card title='Welcome to Dynamic Orders' style ={{padding:'40px',}} loading={isLoadingUserRfqs}>
         <Row justify='end' align='top'>
             <Button type="primary" onClick={(e:any)=> navigate(`/service/new`)}>
@@ -89,6 +103,7 @@ const UserLayout = ({user}: Props) => {
             </Col>
         </Row>
     </Card>
+    </>
   );
 }
 

@@ -38,7 +38,7 @@ function App() {
   <Authenticator socialProviders={['google']} signUpAttributes={['email']}>
       {({ signOut, user }:any) => (
         <main>
-        <Row justify='end' >
+        <Row justify='end' gutter={8} >
          <Button type="link" onClick={signOut} size='large' style={{color:'green' , padding:'20px'}}>
            Sign Out
          </Button> 

@@ -7,6 +7,9 @@ import UserRfqForm from '../../src/components/UserRfqForm'
 import { selectServices } from '../app/redux/redux';
 import {useAppSelector} from '../app/hooks';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
+import { useNavigate  } from "react-router-dom";
+
+
 const { TabPane } = Tabs;
 const { confirm , error } = Modal;
 
@@ -18,6 +21,8 @@ type Props = {
 
 
 const UserServiceDetailsPage = ({user}: Props) => {
+    let navigate = useNavigate ();
+
   const services =useAppSelector(selectServices);
   const [currentService, setCurrentService] = useState<any>(null);
   const[current,setCurrent]= useState<any>('1');
@@ -76,8 +81,23 @@ console.log('current service' , currentService , suggestions)
 
 
   return (
+    <>
+      <Row  gutter={8}>
+            <Col span={18}>
+             {''} 
+             </Col>
+            <Col>
+              <Button type="link" onClick={()=> navigate({pathname: `/admin`})} size='large' style={{color:'green' , padding:'20px',float:'right'}}>
+                Admin
+              </Button> 
+              <Button type="link" onClick={()=> navigate({pathname: `/`})} size='large' style={{color:'green' , padding:'20px',float:'right'}}>
+                Home
+              </Button> 
+           </Col>
+    </Row>
     <Card title='Place your orders and track them in real time using a 
     customized flow specified by the administrator.' style ={{padding:'40px',}}>
+      
       <Tabs defaultActiveKey="1"  activeKey={current} tabPosition='left'>
         <TabPane tab="Select Service" key="1">
          {renderSelectService()}      
@@ -90,6 +110,7 @@ console.log('current service' , currentService , suggestions)
         </TabPane> */}
       </Tabs>
     </Card>
+    </>
   );
 }
 

@@ -7,6 +7,8 @@ import UpdateOrderSteps from '../components/UpdateOrderSteps'
 import {getRfqById , createOrUpdateRfq} from '../graphQl/queries'
 import {ExclamationCircleOutlined} from '@ant-design/icons';
 import {get , isEmpty} from 'lodash';
+import { useNavigate  } from "react-router-dom";
+
 const {TextArea} = Input;
 const { confirm } = Modal;
 
@@ -19,6 +21,7 @@ type Props = {
 
 const RfqDetailPage
  = ({userPage ,user}: Props) => {
+    let navigate = useNavigate ();
     const [form] = Form.useForm();
     const idUrl = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
     const [isLoading, setIsLoading] = useState(true);
@@ -84,7 +87,23 @@ const RfqDetailPage
     </Row>
 
   return (
-    <div>{!isLoading?
+    <div>
+      {!isLoading && userPage &&
+      <Row  gutter={8}>
+            <Col span={18}>
+             {''} 
+             </Col>
+            <Col>
+              <Button type="link" onClick={()=> navigate({pathname: `/admin`})} size='large' style={{color:'green' , padding:'20px',float:'right'}}>
+                Admin
+              </Button> 
+              <Button type="link" onClick={()=> navigate({pathname: `/`})} size='large' style={{color:'green' , padding:'20px',float:'right'}}>
+                Home
+              </Button> 
+           </Col>
+    </Row>
+      }
+      {!isLoading?
      <Card style={{width:'80%' ,margin:"20px"}}>
           <Row>
           <h3>Order Details</h3>
