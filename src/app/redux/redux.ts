@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import type { RootState } from '../../app/store'
-import {getAllServices , getAllRfq, getAllUserRfq} from '../../graphQl/queries'
+import {getAllServices , getAllRfq, getAllUserRfq ,getRfqByService} from '../../graphQl/queries'
 
 
 // Define a type for the slice state
@@ -41,6 +41,19 @@ export const reduxGetAllRfqs = createAsyncThunk(
     return response;
   }
 );
+
+
+export const reduxGetRfqByService = createAsyncThunk(
+  'dRfq/getRfqsByService',
+  async (id:string) => {
+    const response = await getRfqByService(id);
+    // The value we return becomes the `fulfilled` action payload
+    // console.log('response', response)
+    return response;
+  }
+);
+
+
 
 export const reduxGetAllUserRfqs = createAsyncThunk(
   'dRfq/getAllUserRfqs',
@@ -83,10 +96,20 @@ export const dRfqSlice = createSlice({
         state.isLoadingRfqs = true;
       })
       .addCase(reduxGetAllRfqs.fulfilled, (state, action) => {
-        state.isLoadingServices = false;
+        state.isLoadingRfqs = false;
         state.rfqs = action.payload;
       })
       .addCase(reduxGetAllRfqs.rejected, (state) => {
+        state.isLoadingRfqs = false;
+      })
+      .addCase(reduxGetRfqByService.pending, (state) => {
+        state.isLoadingRfqs = true;
+      })
+      .addCase(reduxGetRfqByService.fulfilled, (state, action) => {
+        state.isLoadingRfqs = false;
+        state.rfqs = action.payload;
+      })
+      .addCase(reduxGetRfqByService.rejected, (state) => {
         state.isLoadingRfqs = false;
       })
      .addCase(reduxGetAllUserRfqs.pending, (state) => {

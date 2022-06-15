@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from 'react';
-import { Tabs , Row , Form , Input, Col, Spin ,Button} from 'antd';
+import { Tabs , Row , Form , Input, Col, Spin ,Button , notification} from 'antd';
 import history from '../helpers/history';
 import ServicesFormFieldTable from '../components/ServiceFormFieldTable';
 import ServiceStepsTable from '../components/ServiceStepsTable'
@@ -80,7 +80,10 @@ const ServiceDetailPage = (props: Props) => {
         }
 
           await createOrUpdateService(payload)
-          .then(res=>console.log('updateRes',res))
+          .then(res=>{console.log('updateRes',res);
+            notification.success({message:`Successfully ${get(serviceData,'id',undefined)?'updated':'created'} Service`}); 
+        })
+          .catch((err)=>notification.error({message:'Error' , description:err.toString()}))
           .finally(()=>setIsUpdateLoading(false));
   };
 

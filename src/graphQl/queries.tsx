@@ -229,3 +229,30 @@ export const createOrUpdateService = (service:any) =>
       }`)
     })
     .then(({data}) => data);
+
+
+  export const getRfqByService = (id: string):Promise<any>  =>
+   client
+    .query({
+      variables: {id},
+      query: gql(`query getRfqByService($id: String){
+      getRfqByService(id: $id ){
+          id
+          userName
+          userId
+          basicFormDetails{
+            label
+            type
+            value
+            options{
+              text
+              value
+            }           
+          }
+          status
+          additionalDetails
+          pdfUrl
+        }
+      }`)
+    })
+    .then(({data}:any) => data.getRfqByService);

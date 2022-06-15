@@ -1,6 +1,6 @@
 
 import React,{useState, useEffect} from 'react';
-import { Modal , Row , Form , Input, Col ,Spin, Card , Button} from 'antd';
+import { Modal , Row , Form , Input, Col ,Spin, Card , Button , notification} from 'antd';
 import history from '../helpers/history';
 import UpdateOrderSteps from '../components/UpdateOrderSteps'
 
@@ -76,8 +76,11 @@ const RfqDetailPage
         }
 
           await createOrUpdateRfq(payload)
-          .then(res=>console.log('updateRes',res))
-          .finally(()=>setIsUpdateLoading(false));
+          .then(res=>{console.log('updateRes',res);
+               notification.success({message:'Successfully updated Order'}); 
+           })
+        .catch((err)=>notification.error({message:'Error' , description:err.toString()}))
+        .finally(()=>setIsUpdateLoading(false));
 
     }
 

@@ -35,7 +35,7 @@ function App() {
     
   return (
 
-  <Authenticator socialProviders={['google']} signUpAttributes={['email']}>
+  <Authenticator  signUpAttributes={['email']}>
       {({ signOut, user }:any) => (
         <main>
         <Row justify='end' gutter={8} >

@@ -95,6 +95,7 @@ const RenderFormFields = (item:any ,index:any)=>{
             rfqSteps: steps,
           },
           basicFormDetails: formDetails,
+          serviceId : get(serviceData,'id'),
         }
                 console.log('values', values, payload);
 
@@ -102,7 +103,7 @@ const RenderFormFields = (item:any ,index:any)=>{
           .then(res=>{notification.success({message:'Successfully created Order' , description:'You can track your order on your orders '});
             navigate({pathname: `/services/${get(res,'id')}`});
       })
-          .catch(err=>{notification.error({message:'Error creating Order' , description:err})})
+          .catch(err=>{notification.error({message:'Error creating Order' , description:err.toString()})})
           .finally(()=>{
             setIsUpdateLoading(false);
           });

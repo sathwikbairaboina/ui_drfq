@@ -4,7 +4,7 @@ import { Table, Button, Row } from 'antd';
 import {get, isEmpty} from 'lodash';
 import { useNavigate  } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { selectServices } from '../app/redux/redux';
+import { selectServices , selectLoadingServices} from '../app/redux/redux';
 
 
 
@@ -13,8 +13,10 @@ type Props = {
 };
 
 const ServicesListPage = (props: Props) => {
+  
 
   const services =useAppSelector(selectServices);
+  const isLoadingServices =useAppSelector(selectLoadingServices);
 
   console.log('services', services);
 
@@ -74,10 +76,10 @@ const ServicesListPage = (props: Props) => {
     <div>
       <Row justify='end' align='top' style={{marginBottom :'20px'}}>
          <Button type="primary" onClick={(e:any)=> navigate(`/admin/services/${"New"}`)}>
-         Create New Service
+           Create New Service
          </Button> 
        </Row>
-     <Table columns={columns} dataSource={services||[]} />
+     <Table columns={columns} dataSource={services||[]} loading={isLoadingServices} />
     </div>
   );
 }
